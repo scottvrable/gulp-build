@@ -1,0 +1,44 @@
+- var defaulPageTitle = 'CHANGE TITLE'
+
+doctype
+html(lang='en-us')
+  block vars
+  head
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible' content='IE=edge')
+    meta(name='viewport' content='width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no')
+
+    if pageClass == 'home-page'
+      meta(name='google-site-verification' content='INSERT GOOGLE VERIFICATION NUMBER HERE')
+
+    if description
+      meta(name='description' content=description)
+    if ogTags
+      //- FACEBOOK OPEN GRAPH
+      meta(property='og:url' content=(ogTags.url || ''))
+      meta(property='og:title' content=(ogTags.title || ''))
+      meta(property='og:description' content=(ogTags.desc || ''))
+      meta(property='og:image' content=(ogTags.img || ''))
+      meta(property='og:type' content=(ogTags.type || ''))
+
+      //- TWITTER OPEN GRAPH (defaults to Facebook settings)
+      meta(name='twitter:card' content=(ogTags.twitterCard || 'summary_large_image'))
+      meta(name='twitter:title' content=(ogTags.twitterTitle || ogTags.title || ''))
+      meta(name='twitter:url' content=(ogTags.twitterUrl || ogTags.url || ''))
+      meta(name='twitter:description' content=(ogTags.twitterDesc || ogTags.desc || ''))
+      meta(name='twitter:image' content=(ogTags.twitterImg || ogTags.img || ''))
+
+    link(rel='stylesheet' href='/css/styles.css')
+
+    title
+      if title
+        = title + ' | ' + defaultPageTitle
+      else
+        = defaultPageTitle
+
+  body
+    div(class=pageClass)
+      main(role='main')
+        block content
+    
+    script(src='/js/index.js' type='text/javascript')
