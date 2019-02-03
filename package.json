@@ -17,6 +17,7 @@
     "browserify": "^16.2.2",
     "gulp": "^3.9.1",
     "gulp-autoprefixer": "^5.0.0",
+    "gulp-clean": "^0.4.0",
     "gulp-pug": "^4.0.1",
     "gulp-real-favicon": "^0.3.0",
     "gulp-sass": "^4.0.1",
@@ -28,7 +29,6 @@
   },
   "dependencies": {
     "bourbon": "^5.0.0",
-    "jquery": "^3.3.1",
     "lodash.debounce": "^4.0.8",
     "lodash.template": "^4.4.0"
   }

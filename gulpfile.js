@@ -1,6 +1,7 @@
 var gulp        = require('gulp'),
     pug         = require('gulp-pug'),
     sass        = require('gulp-sass'),
+    clean       = require('gulp-clean'),
     prefix      = require('gulp-autoprefixer'),
     sourcemaps  = require('gulp-sourcemaps'),
     browserify  = require('browserify'),
@@ -11,7 +12,7 @@ var gulp        = require('gulp'),
     svgo        = require('gulp-svgo'),
     source      = require('vinyl-source-stream'),
     buffer      = require('vinyl-buffer'),
-    realFavicon = require ('gulp-real-favicon'),
+    realFavicon = require('gulp-real-favicon'),
     fs          = require('fs');
 
 // File where the favicon markups are stored
@@ -114,6 +115,11 @@ gulp.task('check-for-favicon-update', function(done) {
   });
 });
 
+gulp.task('clean', () => {
+  return gulp.src(['./build/css', './build/fonts', './build/img', './build/js', './build/**/*.html'])
+         .pipe(clean({read: false}));
+});
+
 gulp.task('buildHTML', () => {
   return gulp.src(['./src/**/*.pug', '!./src/**/_*/**/*'])
     .pipe(pug())
@@ -124,7 +130,7 @@ gulp.task('buildHTML', () => {
 });
 
 gulp.task('buildSass', () => {
-  return gulp.src('./src/scss/**/*.scss')
+  return gulp.src('./src/scss/styles.scss')
     .pipe(sourcemaps.init())
     .pipe(sass({
       outputStyle: 'compressed',
@@ -176,4 +182,4 @@ gulp.task('watch', ['browserSync'], () => {
   gulp.watch('./src/**/*.js', ['buildJS']);
 });
 
-gulp.task('default', ['generate-favicon', 'buildHTML', 'inject-favicon-markups',  'buildSass', 'buildJS', 'transferImages', 'transferFonts', 'watch']);
+gulp.task('default', ['clean', 'generate-favicon', 'buildHTML', 'inject-favicon-markups',  'buildSass', 'buildJS', 'transferImages', 'transferFonts', 'watch']);
